@@ -3,3 +3,4 @@ lib/assimp-vc141-mtd.pdb filter=lfs diff=lfs merge=lfs -text
 .vs/Practica1y2/v16/.suo filter=lfs diff=lfs merge=lfs -text
 .vs/Practica1y2/v16/Browse.VC.db filter=lfs diff=lfs merge=lfs -text
 .vs/* filter=lfs diff=lfs merge=lfs -text
+.vs/Practica1y2/v16/ipch/AutoPCH/329795ea167fad3d/FINAL11.ipch filter=lfs diff=lfs merge=lfs -text
