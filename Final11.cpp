@@ -61,8 +61,8 @@ double	deltaTime = 0.0f,
 
 //Lighting
 glm::vec3 lightPosition(-80.0, 0.0f, 0.0f);
-glm::vec3 lightDirection(0.0f, -1.0f, -1.0f); //dirección de rayos luminosos
-glm::vec3 colorambient(0.0f, 1.0f, 0.0f);
+glm::vec3 lightDirection(0.0f, -1.0f, 0.0f); //dirección de rayos luminosos
+glm::vec3 colorambient(0.2f, 0.3f, 0.5f);
 glm::vec3 colordiffuse(0.2f, 0.4f, 0.0f);
 glm::vec3 colorspecular(0.0f, 0.0f, 0.0f);
 glm::vec3 lightPosition2(350.0f, 0.0f, 80.0f);
@@ -218,19 +218,19 @@ void animate(void)
 	lightPosition.z = 50.0 * sin(myVariable);
 	myVariable += 0.1;
 
-	////cambio de color en luz
-	//colorambient.x = 25.0 * cos(variacionLuz);
-	//colorambient.y = 60.0 * sin(variacionLuz);
-	//colorambient.z = 70.0 * cos(variacionLuz);
-	//colordiffuse.x = 20.0 * sin(variacionLuz);
-	//colordiffuse.y = 90.0 * cos(variacionLuz);
-	//colordiffuse.z = 30.0 * sin(variacionLuz);
-	//variacionLuz += 0.01;
+	//cambio de color en luz
+	colorambient.x = 25.0 * cos(variacionLuz);
+	colorambient.y = 60.0 * sin(variacionLuz);
+	colorambient.z = 10.0 * cos(variacionLuz);
+	colordiffuse.x = 20.0 * sin(variacionLuz);
+	colordiffuse.y = 50.0 * cos(variacionLuz);
+	colordiffuse.z = 30.0 * sin(variacionLuz);
+	variacionLuz += 0.01;
 
-	//animación de LUZ ROSA
-	lightPosition2.x = 50 * sin(myVariable2);
-	lightPosition2.z = 50 * sin(myVariable2) + cos(myVariable2);
-	myVariable2 += 0.1;
+	////animación de LUZ ROSA
+	//lightPosition2.x = 50 * sin(myVariable2);
+	//lightPosition2.z = 50 * sin(myVariable2) + cos(myVariable2);
+	//myVariable2 += 0.1;
 
 
 	if (play)
@@ -723,11 +723,15 @@ int main()
 	Model Librero("resources/objects/librero/librero.obj");
 	Model Tapete("resources/objects/tapete/tapete.obj");
 
-	/*ModelAnim animacionPersonaje("resources/objects/Personaje1/PersonajeBrazo.dae");
-	animacionPersonaje.initShaders(animShader.ID);
 
-	ModelAnim ninja("resources/objects/ZombieWalk/ZombieWalk.dae");
+	/*ModelAnim animacionPersonaje("resources/objects/Personaje1/PersonajeBrazo.dae");
+	animacionPersonaje.initShaders(animShader.ID);*/
+
+	/*ModelAnim ninja("resources/objects/ZombieWalk/ZombieWalk.dae");
 	ninja.initShaders(animShader.ID);*/
+
+	/*ModelAnim personajeTwist("resources/objects/Twist/Twist.dae");
+	personajeTwist.initShaders(animShader.ID);*/
 
 	//Inicialización de KeyFrames
 	for (int i = 0; i < MAX_FRAMES; i++)
@@ -766,47 +770,37 @@ int main()
 		//Setup Advanced Lights
 		staticShader.setVec3("viewPos", camera.Position);
 		staticShader.setVec3("dirLight.direction", lightDirection); //direción de rayos luminosos
-		staticShader.setVec3("dirLight.ambient", glm::vec3(1.0f, 1.0f, 1.0f)); //caras menos iluminadas se apaga la fuente de luz(cantidad de luz en el ambiente)
-		//staticShader.setVec3("dirLight.ambient", glm::vec3(1.0f, 1.0f, 1.0f));
-		//staticShader.setVec3("dirLight.diffuse", glm::vec3(0.0f, 0.0f, 0.0f));
-		staticShader.setVec3("dirLight.diffuse", glm::vec3(0.0f, 0.0f, 0.0f)); //caras mas iluminadas
+		staticShader.setVec3("dirLight.ambient", glm::vec3(0.4f, 0.4f, 0.4f)); //caras menos iluminadas se apaga la fuente de luz(cantidad de luz en el ambiente)
+		staticShader.setVec3("dirLight.diffuse", glm::vec3(1.0f, 1.0f, 1.0f)); //caras mas iluminadas
 		staticShader.setVec3("dirLight.specular", glm::vec3(0.0f, 0.0f, 0.0f)); //brillo de la superficie
 
+		////staticShader.setVec3("pointLight[0].position", glm::vec3(-90.0f, 4.0f, -10.0f)); //Recibe atenuación
+		//staticShader.setVec3("pointLight[0].ambient", glm::vec3(0.0f, 0.0f, 0.0f));
+		//staticShader.setVec3("pointLight[0].diffuse", glm::vec3(0.0f, 0.0f, 0.0f));
 		//staticShader.setVec3("pointLight[0].position", glm::vec3(-90.0f, 4.0f, -10.0f)); //Recibe atenuación
-		staticShader.setVec3("pointLight[0].ambient", glm::vec3(0.0f, 0.0f, 0.0f));
-		staticShader.setVec3("pointLight[0].diffuse", glm::vec3(0.0f, 0.0f, 0.0f));
-		staticShader.setVec3("pointLight[0].position", glm::vec3(-90.0f, 4.0f, -10.0f)); //Recibe atenuación
-		staticShader.setVec3("pointLight[0].specular", glm::vec3(0.0f, 0.0f, 0.0f));
-		staticShader.setFloat("pointLight[0].constant", 0.08f); //ATENUACIÓN
-		staticShader.setFloat("pointLight[0].linear", 0.0009f);
-		staticShader.setFloat("pointLight[0].quadratic", 0.0032f);//se indica mas potencia a la fuente (SUBO POTENCIA) al reducir atenuación
+		//staticShader.setVec3("pointLight[0].specular", glm::vec3(0.0f, 0.0f, 0.0f));
+		//staticShader.setFloat("pointLight[0].constant", 0.08f); //ATENUACIÓN
+		//staticShader.setFloat("pointLight[0].linear", 0.0009f);
+		//staticShader.setFloat("pointLight[0].quadratic", 0.0032f);//se indica mas potencia a la fuente (SUBO POTENCIA) al reducir atenuación
 
 		//Luz Azul
-		staticShader.setVec3("pointLight[1].position", lightPosition);
-		staticShader.setVec3("pointLight[1].ambient", glm::vec3(0.0f, 0.0f, 0.7f));  // aca se pone el color de la luz
-		staticShader.setVec3("pointLight[1].diffuse", glm::vec3(0.0f, 0.3f, 1.0f));
-		staticShader.setVec3("pointLight[1].specular", glm::vec3(0.0f, 0.0f, 0.0f));
-		staticShader.setFloat("pointLight[1].constant", 1.0f); //atenuaciones para la intensidad de la luz
-		staticShader.setFloat("pointLight[1].linear", 0.009f);
-		staticShader.setFloat("pointLight[1].quadratic", 0.0032f);
-
-		//Luz Rosa
-		staticShader.setVec3("pointLight[2].position", lightPosition2);
-		staticShader.setVec3("pointLight[2].ambient", glm::vec3(1.0f, 0.0f, 0.7f));  // aca se pone el color de la luz
-		staticShader.setVec3("pointLight[2].diffuse", glm::vec3(1.0f, 0.0f, 0.3f));
-		staticShader.setVec3("pointLight[2].specular", glm::vec3(0.0f, 0.0f, 0.0f));
-		staticShader.setFloat("pointLight[2].constant", 1.0f); //atenuaciones para la intensidad de la luz
-		staticShader.setFloat("pointLight[2].linear", 0.0009f);
-		staticShader.setFloat("pointLight[2].quadratic", 0.032f);
+		staticShader.setVec3("pointLight[0].position", glm::vec3(-80.0, 0.0f, 160.0f));
+		/*staticShader.setVec3("pointLight[1].position", lightPosition);*/
+		staticShader.setVec3("pointLight[0].ambient", glm::vec3(0.0f, 0.0f, 0.7f));  // aca se pone el color de la luz
+		staticShader.setVec3("pointLight[0].diffuse", glm::vec3(0.0f, 0.3f, 1.0f));
+		staticShader.setVec3("pointLight[0].specular", glm::vec3(0.0f, 0.0f, 0.0f));
+		staticShader.setFloat("pointLight[0].constant", 1.0f); //atenuaciones para la intensidad de la luz
+		staticShader.setFloat("pointLight[0].linear", 0.0009f);
+		staticShader.setFloat("pointLight[0].quadratic", 0.0032f);
 
 		////Luz que cambia de colores
-		//staticShader.setVec3("pointLight[3].position", glm::vec3(-80.0, 0.0f, 160.0f));
-		//staticShader.setVec3("pointLight[3].ambient", colorambient);  // aca se pone el color de la luz
-		//staticShader.setVec3("pointLight[3].diffuse", colordiffuse);
-		//staticShader.setVec3("pointLight[3].specular", colorspecular);
-		//staticShader.setFloat("pointLight[3].constant", 1.0f); //atenuaciones para la intensidad de la luz
-		//staticShader.setFloat("pointLight[3].linear", 0.0009f);
-		//staticShader.setFloat("pointLight[3].quadratic", 0.032f);
+		staticShader.setVec3("pointLight[1].position", glm::vec3(-10.0, 0.0f, 30.0f));
+		staticShader.setVec3("pointLight[1].ambient", colorambient);  // aca se pone el color de la luz
+		staticShader.setVec3("pointLight[1].diffuse", colordiffuse);
+		staticShader.setVec3("pointLight[1].specular", colorspecular);
+		staticShader.setFloat("pointLight[1].constant", 1.0f); //atenuaciones para la intensidad de la luz
+		staticShader.setFloat("pointLight[1].linear", 0.0009f);
+		staticShader.setFloat("pointLight[1].quadratic", 0.0032f);
 
 		staticShader.setFloat("material_shininess", 32.0f);
 
@@ -852,7 +846,8 @@ int main()
 		model = glm::scale(model, glm::vec3(0.5f));	// it's a bit too big for our scene, so scale it down
 		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		animShader.setMat4("model", model);
-		//ninja.Draw(animShader);
+		/*ninja.Draw(animShader);*/
+		/*personajeTwist.Draw(animShader);*/
 
 		// -------------------------------------------------------------------------------------------------------------------------
 		// Escenario
@@ -1629,6 +1624,10 @@ void my_input(GLFWwindow *window, int key, int scancode, int action, int mode)
 		movimientoAvion = 1;
 	if (key == GLFW_KEY_Q && action == GLFW_PRESS && movAvion_x > 30.0f) //Con esta tecla el auto regresa 
 		movAvion_x = 0.0f;
+	if (glfwGetKey(window, GLFW_KEY_O) == GLFW_PRESS)
+		lightDirection.x += 0.5f;
+	if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS)
+		lightDirection.x -= 0.5f;
 	
 	//Car animation
 	//if (key == GLFW_KEY_SPACE && action == GLFW_PRESS)
