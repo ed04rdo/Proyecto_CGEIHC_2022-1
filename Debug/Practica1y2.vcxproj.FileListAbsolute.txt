@@ -1,2 +1,3 @@
 C:\Users\eduar\Documents\UNAM\2022-1\Lab CGEIHC\Práctica 1 y 2\Practica1y2\Debug\Practica1y2.exe
 C:\Users\eduar\Documents\UNAM\2022-1\CGEIHC\ProyectoFinal\ProyectoFinalLCGeIHC\Debug\Practica1y2.exe
+C:\Users\eduar\Documents\UNAM\2022-1\CGEIHC\ProyectoFinal\Proyecto_CGEIHC_2022-1\Debug\Practica1y2.exe
