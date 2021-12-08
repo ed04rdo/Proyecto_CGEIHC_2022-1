@@ -132,7 +132,7 @@ float	incX = 0.0f,
 		movPieDerInc = 0.0f,
 		movCabezaInc = 0.0f;
 
-#define MAX_FRAMES 9
+#define MAX_FRAMES 30
 int i_max_steps = 60;
 int i_curr_steps = 0;
 typedef struct _frame
@@ -722,6 +722,10 @@ int main()
 	Model Garage("resources/objects/garage/double_garage.obj");
 	Model Librero("resources/objects/librero/librero.obj");
 	Model Tapete("resources/objects/tapete/tapete.obj");
+	Model HombreNieve("resources/objects/Munieco_Nieve/snowman_STQ0J9E.obj");
+	Model Bastones("resources/objects/Bastones/JarWithCandies.obj");
+	Model Esfera("resources/objects/Esfera2/christmas_decoration_a.obj");
+	Model Estrella("resources/objects/Estrella/star_ST61IX0.obj");
 
 
 	/*ModelAnim animacionPersonaje("resources/objects/Personaje1/PersonajeBrazo.dae");
@@ -787,7 +791,7 @@ int main()
 		//staticShader.setFloat("pointLight[0].quadratic", 0.0032f);//se indica mas potencia a la fuente (SUBO POTENCIA) al reducir atenuación
 
 		//Luz Blanca Faros de la calle
-		staticShader.setVec3("pointLight[0].position", glm::vec3(200, 75.0f,220.0f));
+		staticShader.setVec3("pointLight[0].position", glm::vec3(200, 75.0f, 220.0f));
 		/*staticShader.setVec3("pointLight[1].position", lightPosition);*/
 		staticShader.setVec3("pointLight[0].ambient", glm::vec3(1.0f, 1.0f, 1.0f));  // aca se pone el color de la luz
 		staticShader.setVec3("pointLight[0].diffuse", glm::vec3(1.0f, 1.0f, 1.0f));
@@ -853,7 +857,7 @@ int main()
 		animShader.setVec3("light.direction", lightDirection);
 		animShader.setVec3("viewPos", camera.Position);
 
-		
+
 		// -------------------------------------------------------------------------------------------------------------------------
 		// Segundo Personaje Animacion
 		// -------------------------------------------------------------------------------------------------------------------------
@@ -865,7 +869,7 @@ int main()
 		///*ninja.Draw(animShader);*/
 		//caja.Draw(animShader);
 
-		
+
 		// -------------------------------------------------------------------------------------------------------------------------
 		// Escenario
 		// -------------------------------------------------------------------------------------------------------------------------
@@ -1182,13 +1186,13 @@ int main()
 		staticShader.setMat4("model", model);
 		Rejas.Draw(staticShader);
 
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(195.0f+rejas_x, 0.0f, 140.0f));
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(195.0f + rejas_x, 0.0f, 140.0f));
 		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(5.0f));
 		staticShader.setMat4("model", model);
 		Rejas.Draw(staticShader);
 
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(230.0f+rejas_x, 0.0f, 140.0f));
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(230.0f + rejas_x, 0.0f, 140.0f));
 		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(5.0f));
 		staticShader.setMat4("model", model);
@@ -1224,7 +1228,7 @@ int main()
 		staticShader.setMat4("model", model);
 		Rejas.Draw(staticShader);
 
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(500.0f+movAvion_x, 0.0f+movAvion_y, 120.0f+movAvion_z));//70
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(500.0f + movAvion_x, 0.0f + movAvion_y, 120.0f + movAvion_z));//70
 		model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(0.5f));
 		staticShader.setMat4("model", model);
@@ -1236,7 +1240,7 @@ int main()
 		staticShader.setMat4("model", model);
 		Perro.Draw(staticShader);
 
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(40.0f, 0.0f,-150.0f));//70,50
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(40.0f, 0.0f, -150.0f));//70,50
 		model = glm::rotate(model, glm::radians(-180.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(8.0f));
 		staticShader.setMat4("model", model);
@@ -1306,7 +1310,6 @@ int main()
 		staticShader.setMat4("model", model);
 		Lampara_Calle.Draw(staticShader);
 
-		
 		model = glm::translate(glm::mat4(1.0f), glm::vec3(-200.0f, 0.0f, 160.0f));
 		model = glm::rotate(model, glm::radians(270.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(25.0f));
@@ -1498,12 +1501,45 @@ int main()
 		staticShader.setMat4("model", model);
 		Tapete.Draw(staticShader);
 
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(-40.3f, 1.75f, 0.3f)); // translate it down so it's at the center of the scene
-		model = glm::scale(model, glm::vec3(5.0f));	// it's a bit too big for our scene, so scale it down
+		//ANGEL
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-40.3f, 1.75f, 0.0f)); // translate it down so it's at the center of the scene
+		model = glm::scale(model, glm::vec3(10.0f));	// it's a bit too big for our scene, so scale it down
 		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		animShader.setMat4("model", model);
 		//animacionPersonaje.Draw(animShader);
 		Angel.Draw(animShader);
+
+		//NAVIDAD
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-60.0f, 0.0f, 150.0f));
+		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.2f));
+		staticShader.setMat4("model", model);
+		HombreNieve.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(60.0f, 0.0f, 150.0f));
+		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.2f));
+		staticShader.setMat4("model", model);
+		HombreNieve.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 50.0f, 150.0f));
+		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(1.0f));
+		staticShader.setMat4("model", model);
+		Bastones.Draw(staticShader);
+		
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 50.0f, 200.0f));
+		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.8f));
+		staticShader.setMat4("model", model);
+		Esfera.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 50.0f, 250.0f));
+		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.7f));
+		staticShader.setMat4("model", model);
+		Estrella.Draw(staticShader);
+		
 
 
 		// -------------------------------------------------------------------------------------------------------------------------
