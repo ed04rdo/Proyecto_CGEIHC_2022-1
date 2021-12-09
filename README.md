@@ -1,2 +1,0 @@
-# ProyectoFinalLCGeIHC
-ProyectoFinalCasa
