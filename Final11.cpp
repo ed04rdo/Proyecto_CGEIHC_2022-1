@@ -677,13 +677,14 @@ int main()
 	/*Model botaDer("resources/objects/Personaje/bota.obj");
 =======
 	/*Model piso("resources/objects/piso/piso.obj");*/
-	Model botaDer("resources/objects/Personaje/bota.obj");
-	Model piernaDer("resources/objects/Personaje/piernader.obj");
-	Model piernaIzq("resources/objects/Personaje/piernader.obj");
-	Model torso("resources/objects/Personaje/torso.obj");
-	Model brazoDer("resources/objects/Personaje/brazoder.obj");
-	Model brazoIzq("resources/objects/Personaje/brazoizq.obj");
-	Model cabeza("resources/objects/Personaje/cabeza.obj");
+	Model casaVieja("resources/objects/Casa/OldHouse.obj");
+	Model botaDer("resources/objects/PersonaAnim/BotaDer.obj");
+	Model botaIzq("resources/objects/PersonaAnim/BotaIzq.obj");
+	Model cabeza("resources/objects/PersonaAnim/cabeza.obj");
+	Model manoDer("resources/objects/PersonaAnim/manoDerecha.obj");
+	Model manoIzq("resources/objects/PersonaAnim/manoIzquierda.obj");
+	Model pecho("resources/objects/PersonaAnim/pecho.obj");
+	Model torso("resources/objects/PersonaAnim/TorsoPierna.obj");
 	Model carro("resources/objects/lambo/carroceria.obj");
 	Model llanta("resources/objects/lambo/Wheel.obj");
 	Model avionGuerra("resources/objects/Avion/Avion.obj");
@@ -726,16 +727,15 @@ int main()
 	Model Bastones("resources/objects/Bastones/JarWithCandies.obj");
 	Model Esfera("resources/objects/Esfera2/christmas_decoration_a.obj");
 	Model Estrella("resources/objects/Estrella/star_ST61IX0.obj");
-
+	Model Pavo("resources/objects/Pavo/turkey.obj");
+	Model Luces("resources/objects/Luces/glowing_christmas_lights.obj");
+	Model Regalos("resources/objects/Regalos/Christmas_gifts_wrapped_01.obj");
 
 	/*ModelAnim animacionPersonaje("resources/objects/Personaje1/PersonajeBrazo.dae");
 	animacionPersonaje.initShaders(animShader.ID);*/
 
 	/*ModelAnim ninja("resources/objects/ZombieWalk/ZombieWalk.dae");
 	ninja.initShaders(animShader.ID);*/
-
-	ModelAnim Angel("resources/objects/Angel/Angel.dae");
-	Angel.initShaders(animShader.ID);
 
 	/*ModelAnim caja("resources/objects/caja/globo.dae");
 	caja.initShaders(animShader.ID);*/
@@ -876,6 +876,11 @@ int main()
 		staticShader.use();
 		staticShader.setMat4("projection", projection);
 		staticShader.setMat4("view", view);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(150.0f, 0.0f, -10.0f));
+		model = glm::scale(model, glm::vec3(6.0f));
+		staticShader.setMat4("model", model);
+		casaVieja.Draw(staticShader);
 
 		//CASA
 		glEnable(GL_BLEND);
@@ -1393,8 +1398,8 @@ int main()
 		glEnable(GL_BLEND);
 
 		//ALMOHADA
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(30.0f, 50.0f, 0.0f));
-		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(45.0f, 6.0f, 0.0f));
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(0.09f));
 		staticShader.setMat4("model", model);
 		Almohada.Draw(staticShader);
@@ -1421,11 +1426,32 @@ int main()
 		Cama.Draw(staticShader);
 
 		//LAMPARA
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(45.0f, 50.0f, 200.0f));
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-60.0f, 7.0f, -116.0f));
+		model = glm::rotate(model, glm::radians(-180.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.02f));
+		staticShader.setMat4("model", model);
+		Lampara.Draw(staticShader);
+
+		//LAMPARA
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-30.0f, 7.0f, -43.0f));
+		model = glm::rotate(model, glm::radians(-180.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.02f));
+		staticShader.setMat4("model", model);
+		Lampara.Draw(staticShader);
+
+		//MESA REDONDA
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-61.0f, -2.0f, -125.0f));
 		model = glm::rotate(model, glm::radians(-180.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(0.05f));
 		staticShader.setMat4("model", model);
-		Lampara.Draw(staticShader);
+		MesaRedonda.Draw(staticShader);
+
+		//MESA REDONDA
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-28.0f, -2.0f, -50.0f));
+		model = glm::rotate(model, glm::radians(-180.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.05f));
+		staticShader.setMat4("model", model);
+		MesaRedonda.Draw(staticShader);
 
 		//MESA REDONDA
 		model = glm::translate(glm::mat4(1.0f), glm::vec3(55.0f, -5.0f, 25.0f));
@@ -1495,21 +1521,38 @@ int main()
 		Librero.Draw(staticShader);
 
 		//TAPETE
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(-45.0f, 250.0f, 15.0f));
-		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-20.0f, 0.0f, 10.0f));
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(10.0f));
 		staticShader.setMat4("model", model);
 		Tapete.Draw(staticShader);
 
-		//ANGEL
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(-40.3f, 1.75f, 0.0f)); // translate it down so it's at the center of the scene
-		model = glm::scale(model, glm::vec3(10.0f));	// it's a bit too big for our scene, so scale it down
-		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-		animShader.setMat4("model", model);
-		//animacionPersonaje.Draw(animShader);
-		Angel.Draw(animShader);
-
 		//NAVIDAD
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(7.0f, 0.0f, -10.0f));
+		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(20.0f));
+		staticShader.setMat4("model", model);
+		Arbusto.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(7.0f, 15.0f, -10.0f));
+		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.55f));
+		staticShader.setMat4("model", model);
+		Luces.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(7.0f, 10.0f, -10.0f));
+		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.55f));
+		staticShader.setMat4("model", model);
+		Luces.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(10.0f), glm::vec3(7.0f, 5.0f, -10.0f));
+		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.55f));
+		staticShader.setMat4("model", model);
+		Luces.Draw(staticShader);
+
 		model = glm::translate(glm::mat4(1.0f), glm::vec3(-60.0f, 0.0f, 150.0f));
 		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(0.2f));
@@ -1522,25 +1565,59 @@ int main()
 		staticShader.setMat4("model", model);
 		HombreNieve.Draw(staticShader);
 
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 50.0f, 150.0f));
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 20.0f));
 		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(1.0f));
+		model = glm::scale(model, glm::vec3(0.7f));
 		staticShader.setMat4("model", model);
 		Bastones.Draw(staticShader);
 		
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 50.0f, 200.0f));
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-15.0f, 95.0f, 45.0f));
 		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(0.8f));
 		staticShader.setMat4("model", model);
 		Esfera.Draw(staticShader);
 
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 50.0f, 250.0f));
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-5.0f, 95.0f, 45.0f));
 		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(0.7f));
+		model = glm::scale(model, glm::vec3(0.8f));
+		staticShader.setMat4("model", model);
+		Esfera.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(5.0f, 95.0f, 45.0f));
+		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.8f));
+		staticShader.setMat4("model", model);
+		Esfera.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(15.0f, 95.0f, 45.0f));
+		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.8f));
+		staticShader.setMat4("model", model);
+		Esfera.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(7.0f, 23.0f, -10.0f));
+		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.2f));
 		staticShader.setMat4("model", model);
 		Estrella.Draw(staticShader);
-		
 
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(67.0f, 3.5f, 0.0f));
+		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.2f));
+		staticShader.setMat4("model", model);
+		Pavo.Draw(staticShader);	
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 5.0f));
+		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.2f));
+		staticShader.setMat4("model", model);
+		Regalos.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(10.0f, 0.0f, 5.0f));
+		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.2f));
+		staticShader.setMat4("model", model);
+		Regalos.Draw(staticShader);
 
 		// -------------------------------------------------------------------------------------------------------------------------
 		// Carro
@@ -1592,6 +1669,59 @@ int main()
 		staticShader.setMat4("model", model);
 		BMW.Draw(staticShader);
 
+		//------------------------------------------------------------------------------------------------------------------------ -
+		// Personaje
+		// -------------------------------------------------------------------------------------------------------------------------
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0));
+		model = glm::translate(model, glm::vec3(posX, posY, posZ));
+		tmp = model = glm::rotate(model, glm::radians(giroMonito), glm::vec3(0.0f, 1.0f, 0.0));
+		staticShader.setMat4("model", model);
+		torso.Draw(staticShader);
+
+		////Pierna Der
+		//model = glm::translate(tmp, glm::vec3(-0.5f, 0.0f, -0.1f));
+		//model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0));
+		//model = glm::rotate(model, glm::radians(movPieDer), glm::vec3(1.0f, 0.0f, 0.0f));
+		//staticShader.setMat4("model", model);
+		//piernaDer.Draw(staticShader);
+
+		//Pie Der
+		model = glm::translate(model, glm::vec3(0, -0.1f, -0.2f));
+		staticShader.setMat4("model", model);
+		botaDer.Draw(staticShader);
+
+		////Pierna Izq
+		//model = glm::translate(tmp, glm::vec3(0.5f, 0.0f, -0.1f));
+		//model = glm::rotate(model, glm::radians(movPieIzq), glm::vec3(1.0f, 0.0f, 0.0f));
+		//staticShader.setMat4("model", model);
+		//piernaIzq.Draw(staticShader);
+
+		//Pie Iz
+		model = glm::translate(model, glm::vec3(0, -0.1f, -0.2f));
+		staticShader.setMat4("model", model);
+		botaIzq.Draw(staticShader);	//Izq trase
+
+		//Brazo derecho
+		model = glm::translate(tmp, glm::vec3(0.0f, -1.0f, 0.0f));
+		model = glm::translate(model, glm::vec3(-0.85f, 1.0f, 0));
+		model = glm::rotate(model, glm::radians(movBrazoDer), glm::vec3(1.0f, 0.0f, 0.0f));
+		staticShader.setMat4("model", model);
+		manoDer.Draw(staticShader);
+
+		//Brazo izquierdo
+		model = glm::translate(tmp, glm::vec3(0.0f, -1.0f, 0.0f));
+		model = glm::translate(model, glm::vec3(0.85f, 1.0f, 0));
+		model = glm::rotate(model, glm::radians(movBrazoIzq), glm::vec3(1.0f, 0.0f, 0.0f));
+		staticShader.setMat4("model", model);
+		manoIzq.Draw(staticShader);
+
+		//Cabeza
+		model = glm::translate(tmp, glm::vec3(0.0f, -1.0f, 0.0f));
+		model = glm::rotate(model, glm::radians(movCabeza), glm::vec3(0.0f, 1.0f, 0.0));
+		model = glm::translate(model, glm::vec3(0.0f, 1.0f, 0));
+		staticShader.setMat4("model", model);
+		cabeza.Draw(staticShader);
 		
 
 		// -------------------------------------------------------------------------------------------------------------------------
@@ -1669,8 +1799,10 @@ void my_input(GLFWwindow *window, int key, int scancode, int action, int mode)
 		movBrazoIzq += 3.0f;
 	if (glfwGetKey(window, GLFW_KEY_N) == GLFW_PRESS)
 		movBrazoIzq -= 3.0f;
-	if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS)
+	if (glfwGetKey(window, GLFW_KEY_9) == GLFW_PRESS)
 		posY--;
+	if (glfwGetKey(window, GLFW_KEY_0) == GLFW_PRESS)
+		posY++;
 	if (key == GLFW_KEY_2 && action == GLFW_PRESS)
 		animacion2 ^= true;
 	if (key == GLFW_KEY_F && action == GLFW_PRESS)
